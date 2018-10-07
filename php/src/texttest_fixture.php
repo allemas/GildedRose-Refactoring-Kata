@@ -6,6 +6,7 @@ echo "OMGHAI!\n";
 
 $items = array(
     new Item('+5 Dexterity Vest', 10, 20),
+    new Item('foo bar', 4, 20),
     new Item('Aged Brie', 2, 0),
     new Item('Elixir of the Mongoose', 5, 7),
     new Item('Sulfuras, Hand of Ragnaros', 0, 80),
@@ -19,7 +20,7 @@ $items = array(
 
 $app = new GildedRose($items);
 
-$days = 2;
+$days = 3;
 if (count($argv) > 1) {
     $days = (int) $argv[1];
 }
