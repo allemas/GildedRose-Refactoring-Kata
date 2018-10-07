@@ -193,5 +193,19 @@ class GildedRoseTest extends TestCase
     }
 
 
+    /**
+     * "Conjured" items degrade in Quality twice as fast as normal items
+     */
+    function testConjured()
+    {
+        $items = [
+            new Item('Conjured Mana Cake', 3, 6)
+        ];
+        $gilledRose = new GildedRose($items);
+        $gilledRose->update_quality();
+
+        $this->assertEquals(4, $items[0]->quality);
+    }
+
 
 }
