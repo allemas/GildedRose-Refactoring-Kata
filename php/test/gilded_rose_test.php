@@ -1,5 +1,9 @@
 <?php
-
+/**
+ *
+ * https://phpunit.de/manual/6.5/en/organizing-tests.html
+ *
+ */
 require_once 'gilded_rose.php';
 
 use PHPUnit\Framework\TestCase;
@@ -146,5 +150,48 @@ class GildedRoseTest extends TestCase
 
         $this->assertNotEquals(51, $items[0]->quality);
     }
+
+    /**
+     * Quality increases by 2 when there are 10 days or less
+     */
+    function testQualityIncreasedBy2()
+    {
+        $items = [
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 40),
+        ];
+        $gilledRose = new GildedRose($items);
+        $gilledRose->update_quality();
+
+        $this->assertEquals(42, $items[0]->quality);
+    }
+
+    /**
+     * 	and by 3 when there are 5 days or less but
+     */
+    function testQualityIncreasedBy3()
+    {
+        $items = [
+            new Item('Backstage passes to a TAFKAL80ETC concert', 2, 40),
+        ];
+        $gilledRose = new GildedRose($items);
+        $gilledRose->update_quality();
+
+        $this->assertEquals(43, $items[0]->quality);
+    }
+    /**
+     * 		Quality drops to 0 after the concert
+     */
+    function testQualityAfterConcet()
+    {
+        $items = [
+            new Item('Backstage passes to a TAFKAL80ETC concert', 0, 40),
+        ];
+        $gilledRose = new GildedRose($items);
+        $gilledRose->update_quality();
+
+        $this->assertEquals(0, $items[0]->quality);
+    }
+
+
 
 }
