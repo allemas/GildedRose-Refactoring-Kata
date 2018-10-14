@@ -237,7 +237,7 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(($normalItem - $nextItem), 2 * ($normalItem - $nextItem));
     }
 
-
+ 
     function testGoldenMasterMethod()
     {
         $items = array(
