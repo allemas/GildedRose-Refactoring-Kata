@@ -22,6 +22,14 @@ class GildedRoseLegacy
                 case 'Backstage passes to a TAFKAL80ETC concert':
                     $this->UpdateBackstage($item);
                     break;
+                case 'Conjured Mana Cake':
+                    $this->decreaseQuality($item);
+                    $this->decreaseQuality($item);
+                    $item->sell_in = $item->sell_in - 1;
+                    if ($item->sell_in < 0) {
+                        $this->decreaseQuality($item);
+                    }
+                    break;
                 default:
                     $this->UpdateDefault($item);
                     break;

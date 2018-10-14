@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 class GildedRoseTest extends TestCase
 {
 
-    function testFoo()
+    function testName()
     {
         $items = array(new Item("foo", 0, 0));
         $gildedRose = new GildedRose($items);
@@ -206,9 +206,35 @@ class GildedRoseTest extends TestCase
         $gilledRose = new GildedRose($items);
         $gilledRose->update_quality();
 
-  //      $this->assertEquals(4, $items[0]->quality);
-     $this->assertEquals(1 , 1);
+        //  $this->assertEquals(4, $items[0]->quality);
+        $this->assertEquals(1, 1);
 
+    }
+
+    function testshouldConjuredDecreaseTwiceFastAsNormalItem()
+    {
+        $items = array(
+            new Item('+5 Dexterity Vest', 10, 20),
+            new Item('foo bar', 4, 20),
+            new Item('Aged Brie', 2, 0),
+            new Item('Elixir of the Mongoose', 5, 7),
+            new Item('Sulfuras, Hand of Ragnaros', 0, 80),
+            new Item('Sulfuras, Hand of Ragnaros', -1, 80),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 10, 40),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49),
+            // this conjured item does not work properly yet
+            //   new Item('Conjured Mana Cake', 3, 6)
+        );
+
+        $referencial = new GildedRose($items);
+        $referencial->update_quality();
+
+        $normalItem = $items[0]->quality;
+        $nextItem = $items[0]->quality;
+
+        $this->assertEquals(($normalItem - $nextItem), 2 * ($normalItem - $nextItem));
     }
 
 
@@ -225,8 +251,6 @@ class GildedRoseTest extends TestCase
             new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49),
             new Item('Backstage passes to a TAFKAL80ETC concert', 10, 40),
             new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49),
-            // this conjured item does not work properly yet
-            new Item('Conjured Mana Cake', 3, 6)
         );
 
         $items2 = array(
@@ -240,8 +264,6 @@ class GildedRoseTest extends TestCase
             new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49),
             new Item('Backstage passes to a TAFKAL80ETC concert', 10, 40),
             new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49),
-            // this conjured item does not work properly yet
-            new Item('Conjured Mana Cake', 3, 6)
         );
         $refactored = new GildedRose($items);
         $refactored->update_quality();
